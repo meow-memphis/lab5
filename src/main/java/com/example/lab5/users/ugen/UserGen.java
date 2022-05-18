@@ -11,21 +11,27 @@ public class UserGen {
     ArrayList<Student> students = new ArrayList<>();
     ArrayList<Professor> professors = new ArrayList<>();
 
+    int numStudents = 200;
+    int numProfessors = 40;
+
+
     public void genSt(ImpU imp) {
-        for (int i = 0; i < 200; i++) {
+        for (int i = 0; i < numStudents; i++) {
             if (ThreadLocalRandom.current().nextInt(0, 100) > 70) {
                 students.add(new Student(genS(imp.getArrWNames()), genWSurname(genS(imp.getArrSurnames()))));
+            }else {
+                students.add(new Student(genS(imp.getArrNames()), genS(imp.getArrSurnames())));
             }
-            students.add(new Student(genS(imp.getArrNames()), genS(imp.getArrSurnames())));
         }
     }
 
      public void genPr(ImpU imp) {
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < numProfessors; i++) {
             if (ThreadLocalRandom.current().nextInt(0, 100) > 70) {
                 professors.add(new Professor(genS(imp.getArrWNames()), genWMiddlename(genS(imp.getArrMiddlenames())), genWSurname(genS(imp.getArrProfSurnames()))));
+            }else {
+                professors.add(new Professor(genS(imp.getArrNames()), genS(imp.getArrMiddlenames()), genS(imp.getArrProfSurnames())));
             }
-            professors.add(new Professor(genS(imp.getArrNames()), genS(imp.getArrMiddlenames()), genS(imp.getArrProfSurnames())));
         }
     }
 

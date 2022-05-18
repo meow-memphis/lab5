@@ -1,12 +1,14 @@
 package com.example.lab5.users.classes;
 
+import com.example.lab5.books.classes.Book;
+
 import java.util.HashSet;
 
 public abstract class User {
 
-    HashSet books = new HashSet<>();
     final String name;
     final String surname;
+    HashSet<Book> books = new HashSet<>();
 
     public User(String name, String surname) {
         this.name = name;
@@ -17,11 +19,19 @@ public abstract class User {
         return books;
     }
 
+    public void setBooks(HashSet books) {
+        this.books = books;
+    }
+
     public String getName() {
         return name;
     }
 
     public String getSurname() {
         return surname;
+    }
+
+    public String getFullName() {
+        return name + " " + surname;
     }
 }

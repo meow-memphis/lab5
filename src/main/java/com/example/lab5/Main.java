@@ -1,24 +1,22 @@
 package com.example.lab5;
 
-import com.example.lab5.users.ugen.ImpU;
-import com.example.lab5.users.ugen.UserGen;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-
-import java.io.File;
-import java.io.IOException;
-
 public class Main {
 
-    public static void main(String[] args) throws IOException, InvalidFormatException {
+    public static void main(String[] args) {
 
-        // App.main(args);
+       App.main(args);
 
-        ImpU imp = new ImpU();
-
-        File file = new File("C:\\Users\\user\\IdeaProjects\\lab5\\src\\main\\resources\\com\\example\\lab5\\names.xlsx");
-        imp.setAll(file);
-
-        UserGen ugen = new UserGen();
+//        ImpU imp = new ImpU();
+//
+//        File file = new File("C:\\Users\\user\\IdeaProjects\\lab5\\src\\main\\resources\\com\\example\\lab5\\names.xlsx");
+//        imp.setAll(file);
+//
+//        ImpB impB = new ImpB();
+//        File file1 = new File("C:\\Users\\user\\IdeaProjects\\lab5\\src\\main\\resources\\com\\example\\lab5\\books.xlsx");
+//
+//        impB.setAll(file1);
+//
+//        UserGen ugen = new UserGen();
 //        for (String s : imp.getArrNames()) {
 //            System.out.println(s);
 //        }
@@ -37,7 +35,7 @@ public class Main {
 
 
 
-        ugen.genSt(imp);
+//        ugen.genSt(imp);
 
 //        for (Student st: ugen.getStudents()
 //             ) {
@@ -49,14 +47,14 @@ public class Main {
 //        System.out.println();
 //        System.out.println();
 
-        ugen.genPr(imp);
+//        ugen.genPr(imp);
 
 //        for (Professor st: ugen.getProfessors()
 //             ) {
 //            System.out.println(st.getName()+" "+st.getMiddlename() + " "+st.getSurname());
 //        }
 
-        System.out.println();
+//        System.out.println();
 
 
 

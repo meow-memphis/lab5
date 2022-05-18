@@ -9,19 +9,26 @@ import java.io.IOException;
 
 public class ImpB {
 
-    private String[] arrNames;
-    private String[] arrMiddlenames;
-    private String[] arrSurnames;
-    private String[] arrProfSurnames;
-    private String[] arrWNames;
+    private String[] arrRuStNames;
+    private String[] arrEnStNames;
+    private String[] arrEnStUniversities;
+    private String[] arrEnStAuthors;
+    private String[] arrRuFicNames;
+    private String[] arrRuFicAuthors;
+    private String[] arrEnFicNames;
+    private String[] arrEnFicAuthors;
 
 
     public void setAll(File file) throws IOException, InvalidFormatException {
         XSSFWorkbook workbook = new XSSFWorkbook(file);
-        arrNames = read(workbook, 0);
-        arrWNames = read(workbook, 1);
-        arrSurnames = read(workbook, 2);
-        arrProfSurnames = read(workbook, 3);
+        arrRuStNames = read(workbook, 0);
+        arrEnStNames = read(workbook, 1);
+        arrEnStUniversities = read(workbook, 2);
+        arrEnStAuthors = read(workbook, 3);
+        arrRuFicNames = read(workbook, 4);
+        arrRuFicAuthors = read(workbook, 5);
+        arrEnFicNames = read(workbook, 6);
+        arrEnFicAuthors = read(workbook, 7);
         workbook.close();
     }
 

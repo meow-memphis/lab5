@@ -12,4 +12,9 @@ public class Professor extends User {
     public String getMiddlename() {
         return middlename;
     }
+
+    @Override
+    public String getFullName() {
+        return name + " " + middlename + " " + surname;
+    }
 }

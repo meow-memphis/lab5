@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.lab5.Controller">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.TreeView?>
+<?import javafx.scene.layout.AnchorPane?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controller">
+   <children>
+      <TreeView fx:id="tree" layoutX="241.0" layoutY="8.0" prefHeight="435.0" prefWidth="413.0" />
+      <Button layoutX="37.0" layoutY="51.0" mnemonicParsing="false" onAction="#impUser" prefHeight="106.0" prefWidth="186.0" text="ImportUser" />
+      <Button layoutX="37.0" layoutY="193.0" mnemonicParsing="false" onAction="#impBook" prefHeight="106.0" prefWidth="186.0" text="ImportBook" />
+      <Button layoutX="37.0" layoutY="312.0" mnemonicParsing="false" onAction="#start" prefHeight="106.0" prefWidth="186.0" text="Start" />
+   </children>
+</AnchorPane>
