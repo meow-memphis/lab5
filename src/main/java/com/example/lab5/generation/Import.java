@@ -9,21 +9,28 @@ import java.io.IOException;
 
 public class Import {
     //https://statusname.ru/articles/lichnye-imena/pravila-obrazovaniya-i-napisan/
+
+    private String[] arrNames; //+
+    private String[] arrMiddlenames; //+
+    private String[] arrSurnames; //+
     private String[] arrProfSurnames;
-    private String[] arrNames;
-    private String[] arrWNames;
-    private String[] arrSurnames;
-    private String[] arrWSurnames;
 
-    public String[] getArrWSurnames() {
-        return arrWSurnames;
+    private String[] arrWNames; //+
+    private String[] arrWMiddlenames; //+
+    private String[] arrWSurnames; // +
+    private String[] arrWProfSurnames;
+
+
+    public String[] getArrWProfSurnames() {
+        return arrWProfSurnames;
     }
-
-    private String[] arrMiddlenames;
-    private String[] arrWMiddlenames;
 
     public String[] getArrProfSurnames() {
         return arrProfSurnames;
+    }
+
+    public String[] getArrWSurnames() {
+        return arrWSurnames;
     }
 
     public String[] getArrNames() {
@@ -49,12 +56,14 @@ public class Import {
     public void setAll(File file) throws IOException, InvalidFormatException {
         XSSFWorkbook workbook = new XSSFWorkbook(file);
         arrNames = read(workbook, 0);
-        arrSurnames = read(workbook, 1);
-        arrWNames = read(workbook, 4);
+        arrWNames = read(workbook, 1);
+        arrSurnames = read(workbook, 2);
         arrProfSurnames = read(workbook, 3);
         workbook.close();
         arrMiddlenames = setMiddlenames();
         arrWMiddlenames = setWMiddlenames();
+        arrWSurnames = setWSurnames(arrSurnames);
+        arrWProfSurnames = setWSurnames(arrProfSurnames);
     }
 
     public String[] read(XSSFWorkbook workbook, int num) {
@@ -80,7 +89,7 @@ public class Import {
                 arrMiddlenames[i] = name.substring(0, name.length() - 1) + "вич";
             } else if (name.endsWith("ь")) {
                 arrMiddlenames[i] = name.substring(0, name.length() - 1) + "евич";
-            }else {
+            } else {
                 arrMiddlenames[i] = name + "евич";
             }
             i++;
@@ -100,12 +109,28 @@ public class Import {
                 arrWMiddlenames[i] = name.substring(0, name.length() - 1) + "вна";
             } else if (name.endsWith("ь")) {
                 arrWMiddlenames[i] = name.substring(0, name.length() - 1) + "евна";
-            }else {
+            } else {
                 arrWMiddlenames[i] = name + "евна";
             }
             i++;
         }
         return arrWMiddlenames;
+    }
+
+    public String[] setWSurnames(String[] arrSurnames) {
+        String[] arrWSurnames = new String[arrSurnames.length];
+        int i = 0;
+        for (String surname : arrSurnames) {
+            if (surname.endsWith("в") || surname.endsWith("н")) {
+                arrWSurnames[i] = surname + "а";
+            } else if (surname.endsWith("ий")) {
+                arrWSurnames[i] = surname.substring(0, surname.length() - 2) + "ая";
+            } else {
+                arrWSurnames[i] = surname;
+            }
+            i++;
+        }
+        return arrWSurnames;
     }
 
 

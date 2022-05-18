@@ -2,6 +2,7 @@ package com.example.lab5;
 
 import com.example.lab5.generation.Import;
 import com.example.lab5.generation.UserGen;
+import com.example.lab5.users.Professor;
 import com.example.lab5.users.Student;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
@@ -19,14 +20,14 @@ public class Main {
         File file = new File("C:\\Users\\user\\IdeaProjects\\lab5\\src\\main\\resources\\com\\example\\lab5\\names.xlsx");
         imp.setAll(file);
 
-        for (String s : imp.getArrNames()) {
-            System.out.println(s);
-        }
-        for (String s : imp.getArrMiddlenames()) {
-            System.out.println(s);
-        }        for (String s : imp.getArrWMiddlenames()) {
-            System.out.println(s);
-        }
+//        for (String s : imp.getArrNames()) {
+//            System.out.println(s);
+//        }
+//        for (String s : imp.getArrMiddlenames()) {
+//            System.out.println(s);
+//        }        for (String s : imp.getArrWMiddlenames()) {
+//            System.out.println(s);
+//        }
 //        for (String s : imp.getArrWNames()) {
 //            System.out.println(s);
 //        }
@@ -39,11 +40,24 @@ public class Main {
 
         ugen.genSt(imp);
 
-//        for (Student st: ugen.getStudents()
-//             ) {
-//            System.out.println(st.getName()+" "+st.getSurname());
-//
-//        }
+        for (Student st: ugen.getStudents()
+             ) {
+            System.out.println(st.getName()+" "+st.getSurname());
+        }
+
+        System.out.println();
+        System.out.println();
+        System.out.println();
+        System.out.println();
+
+        ugen.genPr(imp);
+
+        for (Professor st: ugen.getProfessors()
+             ) {
+            System.out.println(st.getName()+" "+st.getMiddlename() + " "+st.getSurname());
+        }
+
+        System.out.println();
 
 
 

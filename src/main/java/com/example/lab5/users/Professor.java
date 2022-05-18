@@ -6,8 +6,12 @@ public class Professor extends User {
 
     final String middlename;
 
-    public Professor(HashSet books, String name, String surname, String middlename) {
+    public Professor(String name, String middlename, String surname) {
         super(name, surname);
         this.middlename = middlename;
+    }
+
+    public String getMiddlename() {
+        return middlename;
     }
 }
