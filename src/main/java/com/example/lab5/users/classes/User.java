@@ -1,4 +1,4 @@
-package com.example.lab5.users;
+package com.example.lab5.users.classes;
 
 import java.util.HashSet;
 

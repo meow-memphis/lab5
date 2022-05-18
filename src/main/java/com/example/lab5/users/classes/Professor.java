@@ -1,6 +1,4 @@
-package com.example.lab5.users;
-
-import java.util.HashSet;
+package com.example.lab5.users.classes;
 
 public class Professor extends User {
 

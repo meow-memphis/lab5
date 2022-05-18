@@ -1,9 +1,7 @@
 package com.example.lab5;
 
-import com.example.lab5.generation.Import;
-import com.example.lab5.generation.UserGen;
-import com.example.lab5.users.Professor;
-import com.example.lab5.users.Student;
+import com.example.lab5.users.ugen.ImpU;
+import com.example.lab5.users.ugen.UserGen;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
 import java.io.File;
@@ -15,7 +13,7 @@ public class Main {
 
         // App.main(args);
 
-        Import imp = new Import();
+        ImpU imp = new ImpU();
 
         File file = new File("C:\\Users\\user\\IdeaProjects\\lab5\\src\\main\\resources\\com\\example\\lab5\\names.xlsx");
         imp.setAll(file);

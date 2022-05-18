@@ -1,4 +1,4 @@
-package com.example.lab5.books.eng;
+package com.example.lab5.books.classes.eng;
 
 public class EngEd extends Eng {
 

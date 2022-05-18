@@ -1,18 +1,17 @@
-package com.example.lab5.generation;
+package com.example.lab5.users.ugen;
 
-import com.example.lab5.users.Professor;
-import com.example.lab5.users.Student;
+import com.example.lab5.users.classes.Professor;
+import com.example.lab5.users.classes.Student;
 
 import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class UserGen {
 
-
     ArrayList<Student> students = new ArrayList<>();
     ArrayList<Professor> professors = new ArrayList<>();
 
-    public void genSt(Import imp) {
+    public void genSt(ImpU imp) {
         for (int i = 0; i < 200; i++) {
             if (ThreadLocalRandom.current().nextInt(0, 100) > 70) {
                 students.add(new Student(genS(imp.getArrWNames()), genWSurname(genS(imp.getArrSurnames()))));
@@ -21,7 +20,7 @@ public class UserGen {
         }
     }
 
-     public void genPr(Import imp) {
+     public void genPr(ImpU imp) {
         for (int i = 0; i < 40; i++) {
             if (ThreadLocalRandom.current().nextInt(0, 100) > 70) {
                 professors.add(new Professor(genS(imp.getArrWNames()), genWMiddlename(genS(imp.getArrMiddlenames())), genWSurname(genS(imp.getArrProfSurnames()))));
