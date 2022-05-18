@@ -15,7 +15,7 @@ public class UserGen {
     public void genSt(Import imp) {
         for (int i = 0; i < 200; i++) {
             if (ThreadLocalRandom.current().nextInt(0, 100) > 70) {
-                students.add(new Student(genS(imp.getArrWNames()), genS(imp.getArrWSurnames())));
+                students.add(new Student(genS(imp.getArrWNames()), genWSurname(genS(imp.getArrSurnames()))));
             }
             students.add(new Student(genS(imp.getArrNames()), genS(imp.getArrSurnames())));
         }
@@ -24,7 +24,7 @@ public class UserGen {
      public void genPr(Import imp) {
         for (int i = 0; i < 40; i++) {
             if (ThreadLocalRandom.current().nextInt(0, 100) > 70) {
-                professors.add(new Professor(genS(imp.getArrWNames()), genS(imp.getArrWMiddlenames()), genS(imp.getArrWProfSurnames())));
+                professors.add(new Professor(genS(imp.getArrWNames()), genWMiddlename(genS(imp.getArrMiddlenames())), genWSurname(genS(imp.getArrProfSurnames()))));
             }
             professors.add(new Professor(genS(imp.getArrNames()), genS(imp.getArrMiddlenames()), genS(imp.getArrProfSurnames())));
         }
@@ -41,5 +41,22 @@ public class UserGen {
 
     public ArrayList<Professor> getProfessors() {
         return professors;
+    }
+
+    public String genWMiddlename(String middlename) {
+        String wMiddlename = middlename.substring(0, middlename.length() - 3) + "вна";
+        return wMiddlename;
+    }
+
+    public String genWSurname(String surname) {
+        String wSurname = "";
+        if (surname.endsWith("в") || surname.endsWith("н")) {
+            wSurname = surname + "а";
+        } else if (surname.endsWith("ий")) {
+            wSurname = surname.substring(0, surname.length() - 2) + "ая";
+        } else {
+            wSurname = surname;
+        }
+        return wSurname;
     }
 }
