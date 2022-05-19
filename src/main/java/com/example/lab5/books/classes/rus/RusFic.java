@@ -2,8 +2,14 @@ package com.example.lab5.books.classes.rus;
 
 public class RusFic extends Rus{
 
-    public RusFic(String name) {
+    String author;
+
+    public RusFic(String name, String author) {
         super(name);
+        this.author = author;
     }
 
+    public String getAuthor() {
+        return author;
+    }
 }

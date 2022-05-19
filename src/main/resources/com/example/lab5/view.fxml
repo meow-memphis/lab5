@@ -4,11 +4,11 @@
 <?import javafx.scene.control.TreeView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="661.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controller">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lab5.Controller">
    <children>
-      <TreeView fx:id="tree" layoutX="241.0" layoutY="8.0" prefHeight="435.0" prefWidth="413.0" />
-      <Button layoutX="37.0" layoutY="51.0" mnemonicParsing="false" onAction="#impUser" prefHeight="106.0" prefWidth="186.0" text="ImportUser" />
-      <Button layoutX="37.0" layoutY="193.0" mnemonicParsing="false" onAction="#impBook" prefHeight="106.0" prefWidth="186.0" text="ImportBook" />
-      <Button layoutX="37.0" layoutY="312.0" mnemonicParsing="false" onAction="#start" prefHeight="106.0" prefWidth="186.0" text="Start" />
+      <TreeView fx:id="tree" layoutX="221.0" layoutY="14.0" prefHeight="499.0" prefWidth="524.0" />
+      <Button fx:id="buttonUser" layoutX="14.0" layoutY="143.0" mnemonicParsing="false" onAction="#impUser" prefHeight="106.0" prefWidth="186.0" text="ImportUser" />
+      <Button layoutX="14.0" layoutY="27.0" mnemonicParsing="false" onAction="#impBook" prefHeight="106.0" prefWidth="186.0" text="ImportBook" />
+      <Button layoutX="14.0" layoutY="315.0" mnemonicParsing="false" onAction="#start" prefHeight="106.0" prefWidth="186.0" text="Start" />
    </children>
 </AnchorPane>

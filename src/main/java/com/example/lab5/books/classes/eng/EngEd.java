@@ -1,11 +1,31 @@
 package com.example.lab5.books.classes.eng;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class EngEd extends Eng {
 
-    final String lvl;
+    String lvl;
+    String university;
 
-    public EngEd(String name, String author, String lvl) {
+    public EngEd(String name, String author, String university) {
         super(name, author);
-        this.lvl = lvl;
+        this.university = university;
+        setLvl();
+    }
+
+    public String getLvl() {
+        return lvl;
+    }
+
+    public String getUniversity() {
+        return university;
+    }
+
+    public void setLvl() {
+        if (ThreadLocalRandom.current().nextInt(0, 100)<50){
+            this.lvl = "Master";
+        } else {
+            this.lvl = "Bachelor";
+        }
     }
 }

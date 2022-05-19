@@ -18,6 +18,7 @@ public abstract class Book {
         return name;
     }
 
-
-
+    public String getLang() {
+        return lang;
+    }
 }

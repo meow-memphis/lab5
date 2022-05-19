@@ -9,26 +9,61 @@ import java.io.IOException;
 
 public class ImpB {
 
-    private String[] arrRuStNames;
-    private String[] arrEnStNames;
-    private String[] arrEnStUniversities;
-    private String[] arrEnStAuthors;
-    private String[] arrRuFicNames;
-    private String[] arrRuFicAuthors;
+    private String[] arrEnEdNames;
+    private String[] arrEnEdAuthors;
+    private String[] arrEnEdUniversities;
+
     private String[] arrEnFicNames;
     private String[] arrEnFicAuthors;
+
+    private String[] arrRuEdNames;
+
+    private String[] arrRuFicNames;
+    private String[] arrRuFicAuthors;
+
+
+    public String[] getArrRuEdNames() {
+        return arrRuEdNames;
+    }
+
+    public String[] getArrEnEdNames() {
+        return arrEnEdNames;
+    }
+
+    public String[] getArrEnEdUniversities() {
+        return arrEnEdUniversities;
+    }
+    public String[] getArrEnEdAuthors() {
+        return arrEnEdAuthors;
+    }
+
+    public String[] getArrRuFicNames() {
+        return arrRuFicNames;
+    }
+
+    public String[] getArrRuFicAuthors() {
+        return arrRuFicAuthors;
+    }
+
+    public String[] getArrEnFicNames() {
+        return arrEnFicNames;
+    }
+
+    public String[] getArrEnFicAuthors() {
+        return arrEnFicAuthors;
+    }
 
 
     public void setAll(File file) throws IOException, InvalidFormatException {
         XSSFWorkbook workbook = new XSSFWorkbook(file);
-        arrRuStNames = read(workbook, 0);
-        arrEnStNames = read(workbook, 1);
-        arrEnStUniversities = read(workbook, 2);
-        arrEnStAuthors = read(workbook, 3);
-        arrRuFicNames = read(workbook, 4);
-        arrRuFicAuthors = read(workbook, 5);
-        arrEnFicNames = read(workbook, 6);
-        arrEnFicAuthors = read(workbook, 7);
+        arrEnEdNames = read(workbook, 0);
+        arrEnEdAuthors = read(workbook, 1);
+        arrEnEdUniversities = read(workbook, 2);
+        arrEnFicNames = read(workbook, 3);
+        arrEnFicAuthors = read(workbook, 4);
+        arrRuEdNames = read(workbook, 5);
+        arrRuFicNames = read(workbook, 6);
+        arrRuFicAuthors = read(workbook, 7);
         workbook.close();
     }
 

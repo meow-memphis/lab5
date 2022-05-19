@@ -1,13 +1,18 @@
 package com.example.lab5;
 
+import com.example.lab5.books.bgen.BookFactory;
 import com.example.lab5.books.bgen.ImpB;
-import com.example.lab5.users.classes.Professor;
-import com.example.lab5.users.classes.Student;
+import com.example.lab5.books.classes.Book;
+import com.example.lab5.books.classes.eng.EngEd;
+import com.example.lab5.books.classes.eng.EngFic;
+import com.example.lab5.books.classes.rus.RusFic;
+import com.example.lab5.users.classes.User;
 import com.example.lab5.users.ugen.ImpU;
-import com.example.lab5.users.ugen.UserGen;
+import com.example.lab5.users.ugen.UserFactory;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.stage.FileChooser;
@@ -17,8 +22,21 @@ import java.util.ArrayList;
 
 public class Controller {
 
+    int numBooks = 500;
+    int numUsers = 200;
+
+    UserFactory userFactory = new UserFactory();
+    BookFactory bookFactory = new BookFactory();
+
     @FXML
     private TreeView<String> tree;
+
+    @FXML
+    private Button buttonUser;
+
+    public void initialize(){
+        buttonUser.setDisable(true);
+    }
 
     public static void error(Exception e) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -38,10 +56,15 @@ public class Controller {
             ImpB impB = new ImpB();
             impB.setAll(file);
 
+            bookFactory.createBooks(impB, numBooks);
+
+            buttonUser.setDisable(false);
         } catch (Exception e) {
             error(e);
         }
     }
+
+
 
     @FXML
     void impUser(ActionEvent event) {
@@ -52,6 +75,10 @@ public class Controller {
             File file = fc.showOpenDialog(null);
             ImpU impU = new ImpU();
             impU.setAll(file);
+
+            userFactory.createUsers(impU, numUsers, bookFactory);
+
+            initializeTree(userFactory.getUsers());
 
         } catch (Exception e) {
             error(e);
@@ -68,52 +95,73 @@ public class Controller {
             ImpB impB = new ImpB();
             impB.setAll(fileB);
 
-            UserGen userGen = new UserGen();
-            userGen.genSt(impU);
-            userGen.genPr(impU);
+            bookFactory.createBooks(impB, numBooks);
 
-            initialize(userGen.getStudents(), userGen.getProfessors());
+            userFactory.createUsers(impU, numUsers, bookFactory);
+
+            initializeTree(userFactory.getUsers());
 
         } catch (Exception e) {
             error(e);
         }
     }
 
-    public void initialize(ArrayList<Student> students, ArrayList<Professor> professors) {
+    public void initializeTree(ArrayList<User> users) {
+
+        int stNum = 0;
+        int prNum = 0;
 
         TreeItem<String> rootItem = new TreeItem<>("Пользователи");
         rootItem.setExpanded(true);
-        TreeItem<String> studentBranchItem = new TreeItem<>("Студенты (" + students.size() + ")");
+        TreeItem<String> studentBranchItem = new TreeItem<>();
         rootItem.getChildren().add(studentBranchItem);
-        for (Student student : students) {
-            TreeItem<String> branchItem = new TreeItem<>(student.getFullName());
-//            student.getBooks().forEach((book) -> {
-//                Book bk = (Book) book;
-//                bk.getName();
-            //branchItem.getChildren().add(new TreeItem<>("name : " + reactor.getName()));
-//                    });
-//            TreeItem<String> leafItem1 = new TreeItem<>("name : " + reactor.getName());
-//            TreeItem<String> leafItem2 = new TreeItem<>("burnup : " + reactor.getBurnup());
-//            TreeItem<String> leafItem3 = new TreeItem<>("kpd : " + reactor.getKpd());
-//            TreeItem<String> leafItem4 = new TreeItem<>("enrichment : " + reactor.getEnrichment());
-//            TreeItem<String> leafItem5 = new TreeItem<>("termal_capacity : " + reactor.getTermal_capacity());
-//            TreeItem<String> leafItem6 = new TreeItem<>("electrical_capacity : " + reactor.getElectrical_capacity());
-//            TreeItem<String> leafItem7 = new TreeItem<>("life_time : " + reactor.getLife_time());
-//            TreeItem<String> leafItem8 = new TreeItem<>("first_load : " + reactor.getFirst_load());
-//            TreeItem<String> leafItem9 = new TreeItem<>("source : " + reactor.getSource());
-//
-//            branchItem.getChildren().addAll(leafItem1, leafItem2, leafItem3, leafItem4, leafItem5, leafItem6, leafItem7, leafItem8, leafItem9);
-
-            studentBranchItem.getChildren().add(branchItem);
-        }
-
-        TreeItem<String> professorBranchItem = new TreeItem<>("Преподаватели (" + professors.size() + ")");
+        TreeItem<String> professorBranchItem = new TreeItem<>();
         rootItem.getChildren().add(professorBranchItem);
 
-        for (Professor professor : professors) {
-            TreeItem<String> branchItem = new TreeItem<>(professor.getFullName());
-            professorBranchItem.getChildren().add(branchItem);
+
+        for (User user : users) {
+
+            TreeItem<String> branchItem = new TreeItem<>(user.getFullName() + " (" + user.getBooks().size() + ")");
+            if (user.getClass().getName().equals("com.example.lab5.users.classes.Student")) {
+                studentBranchItem.getChildren().add(branchItem);
+                stNum++;
+            } else {
+                professorBranchItem.getChildren().add(branchItem);
+                prNum++;
+            }
+
+            user.getBooks().forEach((obj) -> {
+                Book book = (Book) obj;
+
+                TreeItem<String> bookItem = new TreeItem<>(book.getName());
+                branchItem.getChildren().add(bookItem);
+                TreeItem<String> leafItemType = new TreeItem<>("type : " + book.getClass().getName().substring(book.getClass().getName().length() - 6).replace(".",""));
+                bookItem.getChildren().add(leafItemType);
+                TreeItem<String> leafItemLang = new TreeItem<>("lang : " + book.getLang());
+                bookItem.getChildren().add(leafItemLang);
+
+                if (book.getClass().getName().equals("com.example.lab5.books.classes.eng.EngEd")) {
+                    EngEd b = (EngEd) book;
+                    TreeItem<String> leafItemAuthor = new TreeItem<>("author : " + b.getAuthor());
+                    bookItem.getChildren().add(leafItemAuthor);
+                    TreeItem<String> leafItemUniversity = new TreeItem<>("university : " + b.getUniversity());
+                    bookItem.getChildren().add(leafItemUniversity);
+                } else if (book.getClass().getName().equals("com.example.lab5.books.classes.eng.EngFic")) {
+                    EngFic b = (EngFic) book;
+                    TreeItem<String> leafItemAuthor = new TreeItem<>("author : " + b.getAuthor());
+                    bookItem.getChildren().add(leafItemAuthor);
+                }else if (book.getClass().getName().equals("com.example.lab5.books.classes.rus.RusFic")) {
+                    RusFic b = (RusFic) book;
+                    TreeItem<String> leafItemAuthor = new TreeItem<>("author : " + b.getAuthor());
+                    bookItem.getChildren().add(leafItemAuthor);
+                }
+
+            });
+
         }
+
+        studentBranchItem.setValue("Студенты (" + stNum + ")");
+        professorBranchItem.setValue("Преподаватели (" + prNum + ")");
 
         tree.setRoot(rootItem);
 
