@@ -13,78 +13,47 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class UserFactory {
 
+    ImpU imp;
 
-    public ArrayList<User> createUsers(ImpU imp, int num, ArrayList<Book> booksList) {
-        ArrayList<User> users = new ArrayList<>();
-        for (int i = 0; i < num; i++) {
-            users.add(createUser(imp, booksList));
-        }
-        return users;
+    public void setImp(ImpU imp) {
+        this.imp = imp;
     }
 
-    public User createUser(ImpU imp, ArrayList<Book> booksList) {
+    GenUser genUser = new GenUser();
+
+    public User createUser(ArrayList<Book> booksList) {
         User user;
         if (ThreadLocalRandom.current().nextInt(0, 100) > 80) {
             if (ThreadLocalRandom.current().nextInt(0, 100) > 70) {
-                user = createWProfessor(imp);
+                user = createWProfessor();
             } else {
-                user = createProfessor(imp);
+                user = createProfessor();
             }
         } else {
             if (ThreadLocalRandom.current().nextInt(0, 100) > 70) {
-                user = createWStudent(imp);
+                user = createWStudent();
             } else {
-                user = createStudent(imp);
+                user = createStudent();
             }
         }
-        user.setBooks(genBooks(booksList));
+        user.setBooks(genUser.genBooks(booksList));
         return user;
     }
 
-    public Student createStudent(ImpU imp) {
-        return new Student(genS(imp.getArrNames()), genS(imp.getArrSurnames()));
+    public Student createStudent() {
+        return new Student(genUser.genS(imp.getArrNames()), genUser.genS(imp.getArrSurnames()));
     }
 
-    public Student createWStudent(ImpU imp) {
-        return new Student(genS(imp.getArrWNames()), genWSurname(genS(imp.getArrSurnames())));
+    public Student createWStudent() {
+        return new Student(genUser.genS(imp.getArrWNames()), genUser.genWSurname(imp.getArrSurnames()));
     }
 
-    public Professor createProfessor(ImpU imp) {
-        return new Professor(genS(imp.getArrNames()), genS(imp.getArrMiddlenames()), genS(imp.getArrProfSurnames()));
+    public Professor createProfessor() {
+        return new Professor(genUser.genS(imp.getArrNames()), genUser.genS(imp.getArrMiddlenames()), genUser.genS(imp.getArrProfSurnames()));
     }
 
-    public Professor createWProfessor(ImpU imp) {
-        return new Professor(genS(imp.getArrWNames()), genWMiddlename(genS(imp.getArrMiddlenames())), genWSurname(genS(imp.getArrProfSurnames())));
+    public Professor createWProfessor() {
+        return new Professor(genUser.genS(imp.getArrWNames()), genUser.genWMiddlename(imp.getArrMiddlenames()), genUser.genWSurname(imp.getArrProfSurnames()));
     }
 
-    public String genS(String[] arr) {
-        String s = arr[ThreadLocalRandom.current().nextInt(0, arr.length)];
-        return s;
-    }
-
-    public String genWMiddlename(String middlename) {
-        String wMiddlename = middlename.substring(0, middlename.length() - 3) + "вна";
-        return wMiddlename;
-    }
-
-    public String genWSurname(String surname) {
-        String wSurname = "";
-        if (surname.endsWith("в") || surname.endsWith("н")) {
-            wSurname = surname + "а";
-        } else if (surname.endsWith("ий")) {
-            wSurname = surname.substring(0, surname.length() - 2) + "ая";
-        } else {
-            wSurname = surname;
-        }
-        return wSurname;
-    }
-
-    public HashSet genBooks(ArrayList<Book> booksList) {
-        int num = ThreadLocalRandom.current().nextInt(3, 11);
-        HashSet<Book> books = new HashSet<>();
-        for (int i = 0; i < num; i++) {
-            books.add(booksList.get(ThreadLocalRandom.current().nextInt(0, booksList.size())));
-        }
-        return books;
-    }
 }

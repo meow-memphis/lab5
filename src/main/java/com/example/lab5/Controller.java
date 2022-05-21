@@ -59,7 +59,10 @@ public class Controller {
             ImpB impB = new ImpB();
             impB.setAll(file);
 
-            books = bookFactory.createBooks(impB, numBooks);
+            bookFactory.setImp(impB);
+            for (int i = 0; i < numBooks; i++) {
+                books.add(bookFactory.createBook());
+            }
 
             buttonUser.setDisable(false);
         } catch (Exception e) {
@@ -76,8 +79,10 @@ public class Controller {
             File file = fc.showOpenDialog(null);
             ImpU impU = new ImpU();
             impU.setAll(file);
-
-            users = userFactory.createUsers(impU, numUsers, books);
+            userFactory.setImp(impU);
+            for (int i = 0; i < numUsers; i++) {
+                users.add(userFactory.createUser(books));
+            }
 
             initializeTree();
 
@@ -89,16 +94,20 @@ public class Controller {
     @FXML
     void start(ActionEvent event) {
         try {
-            File fileU = new File((getClass().getResource("names.xlsx").getFile()));
-            ImpU impU = new ImpU();
-            impU.setAll(fileU);
             File fileB = new File((getClass().getResource("books.xlsx").getFile()));
             ImpB impB = new ImpB();
             impB.setAll(fileB);
-
-            books = bookFactory.createBooks(impB, numBooks);
-
-            users = userFactory.createUsers(impU, numUsers, books);
+            bookFactory.setImp(impB);
+            for (int i = 0; i < numBooks; i++) {
+                books.add(bookFactory.createBook());
+            }
+            File fileU = new File((getClass().getResource("names.xlsx").getFile()));
+            ImpU impU = new ImpU();
+            impU.setAll(fileU);
+            userFactory.setImp(impU);
+            for (int i = 0; i < numUsers; i++) {
+                users.add(userFactory.createUser(books));
+            }
 
             initializeTree();
 

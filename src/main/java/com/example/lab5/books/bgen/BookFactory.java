@@ -12,58 +12,42 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class BookFactory {
 
+    ImpB imp;
+    GenBook genBook = new GenBook();
 
-    public ArrayList<Book> createBooks(ImpB imp, int num) {
-        ArrayList<Book> books = new ArrayList<>();
-        for (int i = 0; i < num; i++) {
-            books.add(createBook(imp));
-        }
-        return books;
+    public void setImp(ImpB imp) {
+        this.imp = imp;
     }
 
-    public String genS(String[] arr) {
-        String s = arr[ThreadLocalRandom.current().nextInt(0, arr.length)];
-        return s;
-    }
-
-    public Book createBook(ImpB imp) {
+    public Book createBook() {
         Book book;
         int rand = ThreadLocalRandom.current().nextInt(0, 100);
         if (rand < 25) {
-            book = createEngEd(imp);
+            book = createEngEd();
         } else if (rand < 50) {
-            book = createEngFic(imp);
+            book = createEngFic();
         } else if (rand < 75) {
-            book = createRusEd(imp);
+            book = createRusEd();
         } else {
-            book = createRusFic(imp);
+            book = createRusFic();
         }
         return book;
     }
 
-    public EngEd createEngEd(ImpB imp) {
-        return new EngEd(genS(imp.getArrEnEdNames()), genS(imp.getArrEnEdAuthors()), genS(imp.getArrEnEdUniversities()));
+    public EngEd createEngEd() {
+        return new EngEd(genBook.genS(imp.getArrEnEdNames()), genBook.genS(imp.getArrEnEdAuthors()), genBook.genS(imp.getArrEnEdUniversities()));
     }
 
-    public EngFic createEngFic(ImpB imp) {
-        return new EngFic(genS(imp.getArrEnFicNames()), genS(imp.getArrEnFicAuthors()));
+    public EngFic createEngFic() {
+        return new EngFic(genBook.genS(imp.getArrEnFicNames()), genBook.genS(imp.getArrEnFicAuthors()));
     }
 
-    public RusEd createRusEd(ImpB imp) {
-        int rand_ru = ThreadLocalRandom.current().nextInt(0, 100);
-        String add = "";
-        if (rand_ru < 34) {
-            add = "Учебник ";
-        } else if (rand_ru < 67) {
-            add = "Задачник ";
-        } else {
-            add = "Пособие ";
-        }
-        return new RusEd(add + genS(imp.getArrRuEdNames()));
+    public RusEd createRusEd() {
+        return new RusEd(genBook.genNameRusEd(imp.getArrRuEdNames()));
     }
 
-    public RusFic createRusFic(ImpB imp) {
-        return new RusFic(genS(imp.getArrRuFicNames()),genS(imp.getArrRuFicAuthors()));
+    public RusFic createRusFic() {
+        return new RusFic(genBook.genS(imp.getArrRuFicNames()),genBook.genS(imp.getArrRuFicAuthors()));
     }
 
 }
