@@ -19,6 +19,10 @@ public class BookFactory {
         this.imp = imp;
     }
 
+    public BookFactory(ImpB imp) {
+        this.imp = imp;
+    }
+
     public Book createBook() {
         Book book;
         int rand = ThreadLocalRandom.current().nextInt(0, 100);

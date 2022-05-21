@@ -25,9 +25,6 @@ public class Controller {
     int numBooks = 500;
     int numUsers = 200;
 
-    UserFactory userFactory = new UserFactory();
-    BookFactory bookFactory = new BookFactory();
-
     ArrayList<User> users = new ArrayList<>();
     ArrayList<Book> books = new ArrayList<>();
 
@@ -58,6 +55,7 @@ public class Controller {
             File file = fc.showOpenDialog(null);
             ImpB impB = new ImpB();
             impB.setAll(file);
+            BookFactory bookFactory = new BookFactory(impB);
 
             bookFactory.setImp(impB);
             for (int i = 0; i < numBooks; i++) {
@@ -79,6 +77,7 @@ public class Controller {
             File file = fc.showOpenDialog(null);
             ImpU impU = new ImpU();
             impU.setAll(file);
+            UserFactory userFactory = new UserFactory(impU);
             userFactory.setImp(impU);
             for (int i = 0; i < numUsers; i++) {
                 users.add(userFactory.createUser(books));
@@ -97,6 +96,7 @@ public class Controller {
             File fileB = new File((getClass().getResource("books.xlsx").getFile()));
             ImpB impB = new ImpB();
             impB.setAll(fileB);
+            BookFactory bookFactory = new BookFactory(impB);
             bookFactory.setImp(impB);
             for (int i = 0; i < numBooks; i++) {
                 books.add(bookFactory.createBook());
@@ -104,6 +104,7 @@ public class Controller {
             File fileU = new File((getClass().getResource("names.xlsx").getFile()));
             ImpU impU = new ImpU();
             impU.setAll(fileU);
+            UserFactory userFactory = new UserFactory(impU);
             userFactory.setImp(impU);
             for (int i = 0; i < numUsers; i++) {
                 users.add(userFactory.createUser(books));
@@ -140,6 +141,7 @@ public class Controller {
                 prNum++;
             }
 
+            // Нужно делать отдельно генерацию и отдельно вывод
             user.getBooks().forEach((obj) -> {
                 Book book = (Book) obj;
 

@@ -14,12 +14,15 @@ import java.util.concurrent.ThreadLocalRandom;
 public class UserFactory {
 
     ImpU imp;
+    GenUser genUser = new GenUser();
 
     public void setImp(ImpU imp) {
         this.imp = imp;
     }
 
-    GenUser genUser = new GenUser();
+    public UserFactory(ImpU imp) {
+        this.imp = imp;
+    }
 
     public User createUser(ArrayList<Book> booksList) {
         User user;
