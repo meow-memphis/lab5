@@ -13,19 +13,16 @@ import java.util.concurrent.ThreadLocalRandom;
 
 public class UserFactory {
 
-    ArrayList<User> users = new ArrayList<>();
 
-    public ArrayList<User> getUsers() {
+    public ArrayList<User> createUsers(ImpU imp, int num, ArrayList<Book> booksList) {
+        ArrayList<User> users = new ArrayList<>();
+        for (int i = 0; i < num; i++) {
+            users.add(createUser(imp, booksList));
+        }
         return users;
     }
 
-    public void createUsers(ImpU imp, int num, BookFactory bookFactory) {
-        for (int i = 0; i < num; i++) {
-            users.add(createUser(imp, bookFactory));
-        }
-    }
-
-    public User createUser(ImpU imp, BookFactory bookFactory) {
+    public User createUser(ImpU imp, ArrayList<Book> booksList) {
         User user;
         if (ThreadLocalRandom.current().nextInt(0, 100) > 80) {
             if (ThreadLocalRandom.current().nextInt(0, 100) > 70) {
@@ -40,7 +37,7 @@ public class UserFactory {
                 user = createStudent(imp);
             }
         }
-        user.setBooks(genBooks(bookFactory));
+        user.setBooks(genBooks(booksList));
         return user;
     }
 
@@ -59,7 +56,6 @@ public class UserFactory {
     public Professor createWProfessor(ImpU imp) {
         return new Professor(genS(imp.getArrWNames()), genWMiddlename(genS(imp.getArrMiddlenames())), genWSurname(genS(imp.getArrProfSurnames())));
     }
-
 
     public String genS(String[] arr) {
         String s = arr[ThreadLocalRandom.current().nextInt(0, arr.length)];
@@ -83,11 +79,11 @@ public class UserFactory {
         return wSurname;
     }
 
-    public HashSet genBooks(BookFactory bookFactory) {
+    public HashSet genBooks(ArrayList<Book> booksList) {
         int num = ThreadLocalRandom.current().nextInt(3, 11);
         HashSet<Book> books = new HashSet<>();
         for (int i = 0; i < num; i++) {
-            books.add(bookFactory.getBooks().get(ThreadLocalRandom.current().nextInt(0, bookFactory.getBooks().size())));
+            books.add(booksList.get(ThreadLocalRandom.current().nextInt(0, booksList.size())));
         }
         return books;
     }

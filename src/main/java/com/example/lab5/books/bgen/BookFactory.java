@@ -13,17 +13,12 @@ import java.util.concurrent.ThreadLocalRandom;
 public class BookFactory {
 
 
-    public ArrayList<Book> getBooks() {
-        return books;
-    }
-
-    ArrayList<Book> books = new ArrayList<>();
-
-
-    public void createBooks(ImpB imp, int num) {
+    public ArrayList<Book> createBooks(ImpB imp, int num) {
+        ArrayList<Book> books = new ArrayList<>();
         for (int i = 0; i < num; i++) {
             books.add(createBook(imp));
         }
+        return books;
     }
 
     public String genS(String[] arr) {
@@ -51,7 +46,7 @@ public class BookFactory {
     }
 
     public EngFic createEngFic(ImpB imp) {
-        return new EngFic(genS(imp.getArrEnEdNames()), genS(imp.getArrEnEdAuthors()));
+        return new EngFic(genS(imp.getArrEnFicNames()), genS(imp.getArrEnFicAuthors()));
     }
 
     public RusEd createRusEd(ImpB imp) {
@@ -62,7 +57,7 @@ public class BookFactory {
         } else if (rand_ru < 67) {
             add = "Задачник ";
         } else {
-            add = "Пособие";
+            add = "Пособие ";
         }
         return new RusEd(add + genS(imp.getArrRuEdNames()));
     }

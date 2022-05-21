@@ -28,6 +28,9 @@ public class Controller {
     UserFactory userFactory = new UserFactory();
     BookFactory bookFactory = new BookFactory();
 
+    ArrayList<User> users = new ArrayList<>();
+    ArrayList<Book> books = new ArrayList<>();
+
     @FXML
     private TreeView<String> tree;
 
@@ -38,7 +41,7 @@ public class Controller {
         buttonUser.setDisable(true);
     }
 
-    public static void error(Exception e) {
+    void error(Exception e) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
@@ -56,15 +59,13 @@ public class Controller {
             ImpB impB = new ImpB();
             impB.setAll(file);
 
-            bookFactory.createBooks(impB, numBooks);
+            books = bookFactory.createBooks(impB, numBooks);
 
             buttonUser.setDisable(false);
         } catch (Exception e) {
             error(e);
         }
     }
-
-
 
     @FXML
     void impUser(ActionEvent event) {
@@ -76,9 +77,9 @@ public class Controller {
             ImpU impU = new ImpU();
             impU.setAll(file);
 
-            userFactory.createUsers(impU, numUsers, bookFactory);
+            users = userFactory.createUsers(impU, numUsers, books);
 
-            initializeTree(userFactory.getUsers());
+            initializeTree();
 
         } catch (Exception e) {
             error(e);
@@ -95,18 +96,18 @@ public class Controller {
             ImpB impB = new ImpB();
             impB.setAll(fileB);
 
-            bookFactory.createBooks(impB, numBooks);
+            books = bookFactory.createBooks(impB, numBooks);
 
-            userFactory.createUsers(impU, numUsers, bookFactory);
+            users = userFactory.createUsers(impU, numUsers, books);
 
-            initializeTree(userFactory.getUsers());
+            initializeTree();
 
         } catch (Exception e) {
             error(e);
         }
     }
 
-    public void initializeTree(ArrayList<User> users) {
+    public void initializeTree() {
 
         int stNum = 0;
         int prNum = 0;
