@@ -1,7 +1,6 @@
 package com.example.lab5.users.ugen;
 
 import com.example.lab5.books.classes.Book;
-import com.example.lab5.users.classes.User;
 
 import java.util.ArrayList;
 import java.util.HashSet;

@@ -34,7 +34,7 @@ public class Controller {
     @FXML
     private Button buttonUser;
 
-    public void initialize(){
+    public void initialize() {
         buttonUser.setDisable(true);
     }
 
@@ -57,7 +57,6 @@ public class Controller {
             impB.setAll(file);
             BookFactory bookFactory = new BookFactory(impB);
 
-            bookFactory.setImp(impB);
             for (int i = 0; i < numBooks; i++) {
                 books.add(bookFactory.createBook());
             }
@@ -78,7 +77,7 @@ public class Controller {
             ImpU impU = new ImpU();
             impU.setAll(file);
             UserFactory userFactory = new UserFactory(impU);
-            userFactory.setImp(impU);
+
             for (int i = 0; i < numUsers; i++) {
                 users.add(userFactory.createUser(books));
             }
@@ -97,21 +96,18 @@ public class Controller {
             ImpB impB = new ImpB();
             impB.setAll(fileB);
             BookFactory bookFactory = new BookFactory(impB);
-            bookFactory.setImp(impB);
             for (int i = 0; i < numBooks; i++) {
                 books.add(bookFactory.createBook());
             }
+
             File fileU = new File((getClass().getResource("names.xlsx").getFile()));
             ImpU impU = new ImpU();
             impU.setAll(fileU);
             UserFactory userFactory = new UserFactory(impU);
-            userFactory.setImp(impU);
             for (int i = 0; i < numUsers; i++) {
                 users.add(userFactory.createUser(books));
             }
-
             initializeTree();
-
         } catch (Exception e) {
             error(e);
         }
@@ -128,7 +124,6 @@ public class Controller {
         rootItem.getChildren().add(studentBranchItem);
         TreeItem<String> professorBranchItem = new TreeItem<>();
         rootItem.getChildren().add(professorBranchItem);
-
 
         for (User user : users) {
 
@@ -147,7 +142,7 @@ public class Controller {
 
                 TreeItem<String> bookItem = new TreeItem<>(book.getName());
                 branchItem.getChildren().add(bookItem);
-                TreeItem<String> leafItemType = new TreeItem<>("type : " + book.getClass().getName().substring(book.getClass().getName().length() - 6).replace(".",""));
+                TreeItem<String> leafItemType = new TreeItem<>("type : " + book.getClass().getName().substring(book.getClass().getName().length() - 6).replace(".", ""));
                 bookItem.getChildren().add(leafItemType);
                 TreeItem<String> leafItemLang = new TreeItem<>("lang : " + book.getLang());
                 bookItem.getChildren().add(leafItemLang);
@@ -162,7 +157,7 @@ public class Controller {
                     EngFic b = (EngFic) book;
                     TreeItem<String> leafItemAuthor = new TreeItem<>("author : " + b.getAuthor());
                     bookItem.getChildren().add(leafItemAuthor);
-                }else if (book.getClass().getName().equals("com.example.lab5.books.classes.rus.RusFic")) {
+                } else if (book.getClass().getName().equals("com.example.lab5.books.classes.rus.RusFic")) {
                     RusFic b = (RusFic) book;
                     TreeItem<String> leafItemAuthor = new TreeItem<>("author : " + b.getAuthor());
                     bookItem.getChildren().add(leafItemAuthor);

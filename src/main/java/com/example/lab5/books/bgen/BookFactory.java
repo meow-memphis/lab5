@@ -5,19 +5,13 @@ import com.example.lab5.books.classes.eng.EngEd;
 import com.example.lab5.books.classes.eng.EngFic;
 import com.example.lab5.books.classes.rus.RusEd;
 import com.example.lab5.books.classes.rus.RusFic;
-import org.apache.xmlbeans.impl.xb.xsdschema.Public;
 
-import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class BookFactory {
 
     ImpB imp;
     GenBook genBook = new GenBook();
-
-    public void setImp(ImpB imp) {
-        this.imp = imp;
-    }
 
     public BookFactory(ImpB imp) {
         this.imp = imp;

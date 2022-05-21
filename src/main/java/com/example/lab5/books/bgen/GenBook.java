@@ -1,9 +1,5 @@
 package com.example.lab5.books.bgen;
 
-import com.example.lab5.books.classes.Book;
-import com.example.lab5.books.classes.rus.RusEd;
-
-import java.util.ArrayList;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class GenBook {
@@ -25,7 +21,6 @@ public class GenBook {
         }
         return (add + genS(arr));
     }
-
 
 
 }

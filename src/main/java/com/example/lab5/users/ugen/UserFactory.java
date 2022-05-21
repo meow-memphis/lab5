@@ -1,24 +1,17 @@
 package com.example.lab5.users.ugen;
 
-import com.example.lab5.books.bgen.BookFactory;
-import com.example.lab5.books.bgen.ImpB;
 import com.example.lab5.books.classes.Book;
 import com.example.lab5.users.classes.Professor;
 import com.example.lab5.users.classes.Student;
 import com.example.lab5.users.classes.User;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class UserFactory {
 
     ImpU imp;
     GenUser genUser = new GenUser();
-
-    public void setImp(ImpU imp) {
-        this.imp = imp;
-    }
 
     public UserFactory(ImpU imp) {
         this.imp = imp;
